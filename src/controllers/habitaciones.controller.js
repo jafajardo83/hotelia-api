@@ -1,23 +1,13 @@
 const Habitacion=require("../models/Habitacion");
     
-exports.obtener=(req, res)=>{
-    const habitaciones=[
-        {
-            "id": 101,
-            "nombrehab": "Suite Deluxe",
-            "capacidad": 3,
-            "camas": 2,
-            "descripcion": "2 camas 1 doble 1 sencilla, baño privado",
-            "wifi":"si",
-            "tv":"si", 
-            "banio":"si", 
-            "cajafuerte":"no", 
-            "nevera":"si",
-            "valornoche": 125000,
-            "img":"https://definicion.de/wp-content/uploads/2019/12/habitacion.jpg"
-          }
-    ]
+exports.obtener=async(req, res)=>{
+  try{
+    const habitaciones= await Habitacion.find();   
     res.json(habitaciones);
+  }catch(error){
+    res.json(error)
+  }
+    
 }
 exports.add=async(req, res) => {
     try{
@@ -26,7 +16,7 @@ exports.add=async(req, res) => {
     const newHabitacion=new Habitacion({nombrehab,numerohab,capacidad,camas,descripcion,wifi,tv,banio,cajafuerte,nevera,valornoche,img})
     await newHabitacion.save();
     console.log(newHabitacion);
-    res.json('Habitación registrada')
+    res.json({msj:"Habitación registrada exitosamente",id:newHabitacion._id})
   }catch(error){
     res.json(error)
   }
