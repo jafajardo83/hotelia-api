@@ -1,7 +1,11 @@
 const express = require('express');
 const morgan = require('morgan');
+const conexionBD = require('./db.conexion');
 const rutasHabitacion = require('./routes/habitaciones.routes');
 const app = express()
+
+//Conexión a la BD
+conexionBD();
 
 //Configuraciones
 app.set("name","api-hotelia");
