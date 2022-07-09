@@ -1,6 +1,6 @@
-
+const Habitacion=require("../models/Habitacion");
     
-exports.obtenerHabitacion=(req, res)=>{
+exports.obtener=(req, res)=>{
     const habitaciones=[
         {
             "id": 101,
@@ -19,14 +19,21 @@ exports.obtenerHabitacion=(req, res)=>{
     ]
     res.json(habitaciones);
 }
-exports.addHabitacion=(req, res) => {
+exports.add=async(req, res) => {
+    try{
     
-    const {nombrehab,capacidad,camas,descripcion,wifi,tv,banio,cajafuerte,nevera,valornoche,img}=req.body;
-    console.log(req.body);
+    const {nombrehab,numerohab,capacidad,camas,descripcion,wifi,tv,banio,cajafuerte,nevera,valornoche,img}=req.body;
+    const newHabitacion=new Habitacion({nombrehab,numerohab,capacidad,camas,descripcion,wifi,tv,banio,cajafuerte,nevera,valornoche,img})
+    await newHabitacion.save();
+    console.log(newHabitacion);
     res.json('Habitación registrada')
+  }catch(error){
+    res.json(error)
+  }
+    
   }
 
-  exports.editHabitacion=(req, res) => {
+  exports.edit=(req, res) => {
     const id=req.params.id;
     console.log(id);
     const {nombrehab,capacidad,camas,descripcion,wifi,tv,banio,cajafuerte,nevera,valornoche,img}=req.body;
