@@ -1,4 +1,5 @@
 const express = require('express');
+const morgan = require('morgan');
 const rutasHabitacion = require('./routes/habitaciones.routes');
 const app = express()
 
@@ -6,15 +7,13 @@ const app = express()
 app.set("name","api-hotelia");
 app.set("port",process.env.port || 3500);
 
+//Midlewares
 app.use(express.json());
+app.use(morgan("dev"));
 
 //Llamado de rutas
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
-app.use("/api/habitaciones",rutasHabitacion)
-
+app.use(express.static("public"));
+app.use("/api/habitaciones",rutasHabitacion);
 
 
 app.get('/usuarios', (req, res) => {

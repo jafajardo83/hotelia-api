@@ -1,21 +1,11 @@
 const {Router}=require("express");
 const rutasHabitacion=Router();
+const ctrHab=require("../controllers/habitaciones.controller")
 
-rutasHabitacion.get('/', (req, res) => {
-    res.send('Aquí las habitaciones')
-  })
+rutasHabitacion.get('/', ctrHab.obtenerHabitacion);
 
-rutasHabitacion.post('/', (req, res) => {
-    console.log(req.body);
-    const {nombrehab,capacidad,camas,descripcion,wifi,tv,banio,cajafuerte,nevera,valornoche,img}=req.body;
-    res.send('Habitación registrada')
-  })
+rutasHabitacion.post('/', ctrHab.addHabitacion);
   
-rutasHabitacion.put('/:id', (req, res) => {
-    const id=req.params.id;
-    console.log(id);
-    const {nombrehab,capacidad,camas,descripcion,wifi,tv,banio,cajafuerte,nevera,valornoche,img}=req.body;
-    res.send('Habitación actualizada')
-  })
+rutasHabitacion.put('/:id',ctrHab.editHabitacion);
 
-  module.exports=rutasHabitacion;
+module.exports=rutasHabitacion;
