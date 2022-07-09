@@ -12,7 +12,8 @@ const habitacionSchema = new Schema({
     cajafuerte: String,
     nevera: String,
     valornoche: Number,
-    img: String
+    img: String,
+    estado: String
   });
 
   module.exports=model("Habitacion",habitacionSchema);

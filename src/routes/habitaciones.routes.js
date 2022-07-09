@@ -9,4 +9,5 @@ rutasHabitacion.post('/', ctrHab.add);
   
 rutasHabitacion.put('/:id',ctrHab.edit);
 
+
 module.exports=rutasHabitacion;
