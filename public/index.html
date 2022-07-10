@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,16 +8,22 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <title>API Hotelia</title>
 </head>
-<body>
-    <div class="jumbotron">
-        <h1>API HOTELIA</h1>
-        Rutas
-Principal: http://localhost:3500/
-Habitaciones
-GEThttp://localhost:3500/habitaciones
-POSThttp://localhost:3500/habitaciones
-PUT http://localhost:3500/habitaciones/101
 
+<body>
+    <div class="container-fluid">
+        <div class="jumbotron">
+            <h1>API HOTELIA</h1>
+            <h2>Rutas</h2>
+            <p><strong>Principal</strong><a href="/"> https//localhost:3500/</a></p>
+            <h2>Habitaciones</h2>
+            <p><strong>GET </strong><a href="/api/habitaciones"> https//localhost:3500/habitaciones</a></p>
+            <p><strong>GET </strong><a href="/api/habitaciones"> https//localhost:3500/habitaciones/id</a><br>
+                <SMall>Esta ruta obtiene una habitación a partir de su <strong>id</strong></SMall></P>
+            <p><strong>POST </strong><a href="/api/habitaciones"> https//localhost:3500/api/habitaciones</a></p>
+            <p><strong>PUT  </strong><a href="/api/habitaciones/62ca10a02f52c0ead5100121"> http://localhost:3500/api/habitaciones/id</a><br>   
+                <SMall>Esta ruta permite modificar cualquier dato de una habitación a partir de su <strong>id</strong></SMall></P>
+        </div>
     </div>
 </body>
+
 </html>

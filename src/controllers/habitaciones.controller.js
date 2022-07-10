@@ -9,6 +9,16 @@ exports.obtener = async (req, res) => {
   }
 
 }
+exports.obtenerid = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const habitaciones = await Habitacion.findById(id);
+    res.status(200).json(habitaciones);
+  } catch (error) {
+    res.status(500).json(error)
+  }
+
+}
 exports.add = async (req, res) => {
   try {
 
@@ -29,7 +39,7 @@ exports.edit = async(req, res) => {
     const estado = req.body ;
     //console.log(`El id que se va a cambiar estado es ${id}`);
     const cambioEstado = await Habitacion.findByIdAndUpdate(id, estado);
-    res.json({ msj: "Habitación actualizada exitosamente", id: newHabitacion._id })
+    res.json({ msj: "Habitación actualizada exitosamente"})
   } catch(error) {
     res.status(500).json(error);
   }
