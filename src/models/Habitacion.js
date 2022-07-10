@@ -16,4 +16,8 @@ const habitacionSchema = new Schema({
     estado: String
   });
 
+  habitacionSchema.methods.setImg=function setImg(filename){
+    this.img=`http://localhost:3500/public/upload/${filename}`;
+    console.log("entró al método"+this.img);
+  }
   module.exports=model("Habitacion",habitacionSchema);

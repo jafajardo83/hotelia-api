@@ -1,7 +1,9 @@
 const express = require('express');
+const cors = require("cors");
 const morgan = require('morgan');
 const conexionBD = require('./db.conexion');
 const rutasHabitacion = require('./routes/habitaciones.routes');
+const rutasUser=require('./routes/users.routes');
 const app = express()
 
 //Conexión a la BD
@@ -18,23 +20,7 @@ app.use(morgan("dev"));
 //Llamado de rutas
 app.use(express.static("public"));
 app.use("/api/habitaciones",rutasHabitacion);
-
-
-app.get('/usuarios', (req, res) => {
-  res.send('Aquí los usuarios')
-})
-
-app.post('/usuarios', (req, res) => {
-  res.send('huesped registrado')
-})
-
-app.get('/reservas', (req, res) => {
-  res.send('Aquí las reservas')
-})
-
-app.post('/reservas', (req, res) => {
-  res.send('Reserva realizada')
-})
+app.use("/api/users",rutasUser);
 
 
 module.exports=app;
