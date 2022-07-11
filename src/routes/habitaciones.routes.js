@@ -23,9 +23,9 @@ rutasHabitacion.get('/', ctrHab.obtener);
 
 rutasHabitacion.get('/:id', ctrHab.obtenerid);
 
-rutasHabitacion.post('/', carga.single("img"),ctrHab.add,);
+rutasHabitacion.post('/', carga.single('img'),ctrHab.add,);
   
-rutasHabitacion.put('/:id',ctrHab.edit);
+rutasHabitacion.put('/:id',carga.single('img'),ctrHab.edit);
 
 
 module.exports=rutasHabitacion;

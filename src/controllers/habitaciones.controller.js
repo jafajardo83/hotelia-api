@@ -44,9 +44,18 @@ exports.add = async (req, res) => {
 exports.edit = async(req, res) => {
   try {
     const id = req.params.id;
-    const estado = req.body ;
+    const newHabitacion = new Habitacion(req.body,req.file)
+    console.log(req.file);
+    
+    if(req.file){
+      const {filename}=req.file;
+      newHabitacion.setImg(filename);
+      console.log("si hay imagen")
+    }else{
+      console.log("No hay imagen")
+    }
     //console.log(`El id que se va a cambiar estado es ${id}`);
-    const cambioEstado = await Habitacion.findByIdAndUpdate(id, estado);
+    const cambioHabitacion = await Habitacion.findByIdAndUpdate(id, newHabitacion);
     res.json({ msj: "Habitación actualizada exitosamente"})
   } catch(error) {
     res.status(500).json(error);

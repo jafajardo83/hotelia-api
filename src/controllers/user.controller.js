@@ -26,18 +26,19 @@ exports.obtenerid = async (req, res) => {
     try {
   
       //const { nombrehab, numerohab, capacidad, camas, descripcion, wifi, tv, banio, cajafuerte, nevera, valornoche, img, estado } = req.body;
-      const newUser = new User(req.body,req.file)
+      const newUser = new User(req.body)
       console.log(req.file);
+
       if(req.file){
-        const {filename}=req.file;
-        newUser.setImg(filename);
+        const { filename }=req.file;
+        User.setImg(filename);
         console.log("si hay imagen")
       }else{
         console.log("No hay imagen")
       }
       await newUser.save();
       console.log(newUser);
-      res.json({ msj: "Habitación registrada exitosamente", id: newUser._id })
+      //res.json({ msj: "Usuario registrado exitosamente", id: newUser._id })
     } catch (error) {
       res.status(500).json({msj:"Error al registrar"+error})
     }
@@ -47,10 +48,18 @@ exports.obtenerid = async (req, res) => {
 exports.edit = async(req, res) => {
     try {
       const id = req.params.id;
-      const estado = req.body ;
-      //console.log(`El id que se va a cambiar estado es ${id}`);
-      const cambioEstado = await User.findByIdAndUpdate(id, estado);
-      res.json({ msj: "Habitación actualizada exitosamente"})
+      const newUser = new User(req.body,req.file)
+      console.log(req.file);
+
+      if(req.file){
+        const { filename }=req.file;
+        newUser.setImg(filename);
+        console.log("si hay imagen")
+      }else{
+        console.log("No hay imagen")
+      }
+      const cambioUsuario = await User.findByIdAndUpdate(id, newUser);
+      res.json({ msj: "Huesped actualizado exitosamente"})
     } catch(error) {
       res.status(500).json(error);
     }
@@ -59,7 +68,6 @@ exports.edit = async(req, res) => {
   exports.login=async(req,res)=>{
     try {
         const {email, password}=req.body;
-        console.log(`usuario ${email} y password ${password}`);
         if(email && password){
            
             const user=await User.findOne({email});
@@ -71,12 +79,12 @@ exports.edit = async(req, res) => {
                 
                 if(user.password==password){
                     
-                    const {_id,email,nombre,apellido}=user;
-                    console.log("Entramos"+user);
+                    const {_id,email}=user;
+                    
                     const opt={
                         expiresIn:'1h'
                     }
-                    const palabra="hoteliakuepa";
+                    const palabra="hotelia-kuepa";
                     const token=jwt.sign({_id,email},palabra,opt);
                     console.log(token);
                     res.json({token});

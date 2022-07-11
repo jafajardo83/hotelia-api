@@ -13,11 +13,15 @@ const habitacionSchema = new Schema({
     nevera: String,
     valornoche: Number,
     img: String,
-    estado: String
+    estado: String,
+    _id: Number
   });
 
-  habitacionSchema.methods.setImg=function setImg(filename){
-    this.img=`http://localhost:3500/public/upload/${filename}`;
-    console.log("entró al método"+this.img);
+  habitacionSchema.methods.setImg=function setImg(filename) {
+      this.img=`http://localhost:3500/public/${filename}`;
+      console.log("entró al método "+this.img);
   }
+
+ 
+  
   module.exports=model("Habitacion",habitacionSchema);
