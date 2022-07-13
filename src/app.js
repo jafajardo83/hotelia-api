@@ -11,8 +11,8 @@ conexionBD();
 
 //Configuraciones
 app.set("name","api-hotelia");
-//app.set("port",process.env.PORT || 3000);
-//app.set("host",process.env.HOST || 'localhost');
+app.set("port",process.env.PORT || 3000);
+app.set("host",process.env.HOST || 'localhost');
 
 
 //Midlewares
@@ -24,6 +24,7 @@ app.use(morgan("dev"));
 app.use('/public', express.static('public'));
 app.use('/public', express.static('public/upload'));
 //app.use('/public', express.static(__dirname + '/public'));
+//app.use("/")
 app.use("/habitaciones",rutasHabitacion);
 app.use("/users",rutasUser);
 
