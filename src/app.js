@@ -22,8 +22,8 @@ app.use(morgan("dev"));
 //Llamado de rutas
 app.use('/public', express.static('public/upload'));
 //app.use('/public', express.static(__dirname + '/public'));
-app.use("/api/habitaciones",rutasHabitacion);
-app.use("/api/users",rutasUser);
+app.use("/habitaciones",rutasHabitacion);
+app.use("/users",rutasUser);
 
 
 module.exports=app;

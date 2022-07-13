@@ -84,8 +84,7 @@ exports.edit = async(req, res) => {
                     const opt={
                         expiresIn:'1h'
                     }
-                    const palabra="hotelia-kuepa";
-                    const token=jwt.sign({_id,email},palabra,opt);
+                    const token=jwt.sign({_id,email},process.env.TOKEN_SECRET,opt);
                     console.log(token);
                     res.json({token});
                     
