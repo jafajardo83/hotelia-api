@@ -1,6 +1,7 @@
 
 const {Router}=require("express");
 const rutasHabitacion=Router();
+const autorizedHuesped=require("../auth/auth.huesped");
 const ctrHab=require("../controllers/habitaciones.controller")
 const multer=require("multer");
 const fecha=Date.now();
@@ -19,13 +20,13 @@ const carga=multer({storage:rutaStorage});
 
 
 
-rutasHabitacion.get('/', ctrHab.obtener);
+rutasHabitacion.get('/', autorizedHuesped, ctrHab.obtener);
 
 rutasHabitacion.get('/:id', ctrHab.obtenerid);
 
 rutasHabitacion.post('/', carga.single('img'),ctrHab.add,);
   
-rutasHabitacion.put('/:id',carga.single('img'),ctrHab.edit);
+rutasHabitacion.put('/:id', autorizedHuesped,carga.single('img'),ctrHab.edit);
 
 
 module.exports=rutasHabitacion;
