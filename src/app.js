@@ -11,8 +11,8 @@ conexionBD();
 
 //Configuraciones
 app.set("name","api-hotelia");
-app.set("port",process.env.PORT || 3000);
-app.set("host",process.env.HOST || 'localhost');
+//app.set("port",process.env.PORT || 3000);
+//app.set("host",process.env.HOST || 'localhost');
 
 
 //Midlewares
