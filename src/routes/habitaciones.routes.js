@@ -20,13 +20,13 @@ const carga=multer({storage:rutaStorage});
 
 
 
-rutasHabitacion.get('/', autorizedHuesped, ctrHab.obtener);
+rutasHabitacion.get('/', ctrHab.obtener);
 
 rutasHabitacion.get('/:id', ctrHab.obtenerid);
 
 rutasHabitacion.post('/', carga.single('img'),ctrHab.add,);
   
-rutasHabitacion.put('/:id', autorizedHuesped,carga.single('img'),ctrHab.edit);
+rutasHabitacion.put('/:id', carga.single('img'),ctrHab.edit);
 
 
 module.exports=rutasHabitacion;
