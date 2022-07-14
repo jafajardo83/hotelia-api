@@ -18,8 +18,8 @@ const habitacionSchema = new Schema({
   });
 
   habitacionSchema.methods.setImg=function setImg(filename) {
-      this.img=`http://${process.env.HOST}:${process.env.PORT}/public/${filename}`;
-      console.log("entró al método "+this.img);
+    this.img=`/public/${filename}`;
+    console.log("entró al método "+this.img);
   }
 
  
