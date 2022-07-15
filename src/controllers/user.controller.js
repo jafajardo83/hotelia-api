@@ -1,34 +1,42 @@
-const User = require("../models/Huesped");
+const User = require("../models/User");
 const jwt=require("jsonwebtoken");
 
 exports.obtener = async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await User.find().populate('reservas',{
+      "_id": 1,
+        "fentrada": 1,
+        "fsalida": 1,
+        "cantidadNoches": 1,
+        "freserva": 1,
+        "totalreserva":1
+    });
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json(error)
   }
-
 }
-
 exports.obtenerid = async (req, res) => {
     try {
       const id = req.params.id;
-      const users = await User.findById(id);
+      const users = await User.findById(id).populate('reservas',{
+        "_id": 1,
+          "fentrada": 1,
+          "fsalida": 1,
+          "cantidadNoches": 1,
+          "freserva": 1,
+          "totalreserva":1
+      });
       res.status(200).json(users);
     } catch (error) {
       res.status(500).json(error)
     }
-  
   }
-
   exports.add = async (req, res) => {
     try {
-  
       //const { nombrehab, numerohab, capacidad, camas, descripcion, wifi, tv, banio, cajafuerte, nevera, valornoche, img, estado } = req.body;
       const newUser = new User(req.body)
       console.log(req.file);
-
       if(req.file){
         const { filename }=req.file;
         User.setImg(filename);

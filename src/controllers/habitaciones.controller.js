@@ -21,7 +21,6 @@ exports.obtenerid = async (req, res) => {
 }
 exports.add = async (req, res) => {
   try {
-
     //const { nombrehab, numerohab, capacidad, camas, descripcion, wifi, tv, banio, cajafuerte, nevera, valornoche, img, estado } = req.body;
     const newHabitacion = new Habitacion(req.body,req.file)
     console.log(req.file);

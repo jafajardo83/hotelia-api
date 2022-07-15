@@ -1,8 +1,8 @@
 const {Schema,model}=require("mongoose");
 
-const huespedSchema = new Schema({
+const userSchema = new Schema({
+    _id:Number,  
     tipodoc: String,
-    _id:Number,
     nombre: String,
     apellido: String,
     fnacimiento:Date,
@@ -16,12 +16,16 @@ const huespedSchema = new Schema({
     paisorigen:String,
     password: String,
     tipouser:String,
-    img:String
+    img:String,
+    reservas:[{
+      type:Schema.Types.ObjectId,
+      ref:'Reserva'
+    }]
    
   });
 
-  huespedSchema.methods.setImg=function setImg(filename) {
+  userSchema.methods.setImg=function setImg(filename) {
     this.img=`/public/${filename}`;
     console.log("entró al método "+this.img);
 }
-  module.exports=model("Huesped",huespedSchema);
+  module.exports=model("User",userSchema);

@@ -1,8 +1,9 @@
 const {Schema,model}=require("mongoose");
 
 const habitacionSchema = new Schema({
+    
+    _id: Number,
     nombrehab: String,
-    numerohab: String,
     capacidad: Number,
     camas: String, 
     descripcion: String,
@@ -14,7 +15,11 @@ const habitacionSchema = new Schema({
     valornoche: Number,
     img: String,
     estado: String,
-    _id: Number
+    
+    reservas:[{
+        type:Schema.Types.ObjectId,
+        ref:'Reserva'
+      }]
   });
 
   habitacionSchema.methods.setImg=function setImg(filename) {

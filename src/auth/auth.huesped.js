@@ -1,4 +1,4 @@
-const User=require("../models/Huesped");
+const User=require("../models/User");
 const jwt=require("jsonwebtoken");
 
 const autorizedHuesped=async(req,res,next)=>{

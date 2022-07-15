@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const conexionBD = require('./db.conexion');
 const rutasHabitacion = require('./routes/habitaciones.routes');
 const rutasUser=require('./routes/users.routes');
+const rutasReservas=require('./routes/reservas.routes')
 const app = express()
 require('dotenv').config()
 //Conexión a la BD
@@ -28,6 +29,6 @@ app.use('/public', express.static('public/upload'));
 //app.use("/")
 app.use("/habitaciones",rutasHabitacion);
 app.use("/users",rutasUser);
-
+app.use("/reservas",rutasReservas);
 
 module.exports=app;
