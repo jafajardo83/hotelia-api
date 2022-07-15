@@ -2,7 +2,14 @@ const Habitacion = require("../models/Habitacion");
 
 exports.obtener = async (req, res) => {
   try {
-    const habitaciones = await Habitacion.find();
+    const habitaciones = await Habitacion.find().populate('reservas',{
+      "_id": 1,
+        "fentrada": 1,
+        "fsalida": 1,
+        "cantidadNoches": 1,
+        "freserva": 1,
+        "totalreserva":1
+    });;
     res.status(200).json(habitaciones);
   } catch (error) {
     res.status(500).json(error)
@@ -12,7 +19,14 @@ exports.obtener = async (req, res) => {
 exports.obtenerid = async (req, res) => {
   try {
     const id = req.params.id;
-    const habitaciones = await Habitacion.findById(id);
+    const habitaciones = await Habitacion.findById(id).populate('reservas',{
+      "_id": 1,
+        "fentrada": 1,
+        "fsalida": 1,
+        "cantidadNoches": 1,
+        "freserva": 1,
+        "totalreserva":1
+    });;
     res.status(200).json(habitaciones);
   } catch (error) {
     res.status(500).json(error)

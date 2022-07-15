@@ -3,14 +3,29 @@ const jwt=require("jsonwebtoken");
 
 exports.obtener = async (req, res) => {
   try {
-    const users = await User.find().populate('reservas',{
-      "_id": 1,
-        "fentrada": 1,
-        "fsalida": 1,
-        "cantidadNoches": 1,
-        "freserva": 1,
-        "totalreserva":1
-    });
+    const users = await User.find().populate({
+      path: "reservas",
+      select:{user:0}, // populate reservas
+      populate: {
+         path: "habitaciones",
+         select:{
+          "_id": 1,
+        "nombrehab":1,
+        "capacidad": 1,
+        "camas": 1, 
+        "descripcion": 1,
+        "wifi": 1,
+        "tv": 1,
+        "banio": 1,
+        "cajafuerte": 1,
+        "nevera": 1,
+        "valornoche": 1,
+        "img": 1,
+        "estado": 1
+         } // in reservas, populate habitaciones
+      }
+    }     
+    );
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json(error)
@@ -19,14 +34,28 @@ exports.obtener = async (req, res) => {
 exports.obtenerid = async (req, res) => {
     try {
       const id = req.params.id;
-      const users = await User.findById(id).populate('reservas',{
-        "_id": 1,
-          "fentrada": 1,
-          "fsalida": 1,
-          "cantidadNoches": 1,
-          "freserva": 1,
-          "totalreserva":1
-      });
+      const users = await User.findById(id).populate({
+        path: "reservas", // populate reservas
+        populate: {
+           path: "habitaciones",
+           select:{
+            "_id": 1,
+          "nombrehab":1,
+          "capacidad": 1,
+          "camas": 1, 
+          "descripcion": 1,
+          "wifi": 1,
+          "tv": 1,
+          "banio": 1,
+          "cajafuerte": 1,
+          "nevera": 1,
+          "valornoche": 1,
+          "img": 1,
+          "estado": 1
+           } // in reservas, populate habitaciones
+        }
+      }     
+      );
       res.status(200).json(users);
     } catch (error) {
       res.status(500).json(error)
@@ -46,7 +75,7 @@ exports.obtenerid = async (req, res) => {
       }
       await newUser.save();
       console.log(newUser);
-      //res.json({ msj: "Usuario registrado exitosamente", id: newUser._id })
+      res.json({ msj: "Usuario registrado exitosamente", newUser })
     } catch (error) {
       res.status(500).json({msj:"Error al registrar"+error})
     }

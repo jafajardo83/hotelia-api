@@ -1,4 +1,5 @@
 const Huesped = require("../models/User");
+const Habitacion = require("../models/Habitacion");
 const Reserva = require("../models/Reservas");
 const jwt=require("jsonwebtoken");
 
@@ -11,7 +12,20 @@ exports.obtener = async (req, res) => {
     "apellido": 1,
     "email":1,
     "telefono":1
-    
+    }).populate('habitaciones',{
+      "_id": 1,
+    "nombrehab":1,
+    "capacidad": 1,
+    "camas": 1, 
+    "descripcion": 1,
+    "wifi": 1,
+    "tv": 1,
+    "banio": 1,
+    "cajafuerte": 1,
+    "nevera": 1,
+    "valornoche": 1,
+    "img": 1,
+    "estado": 1
     });
     res.status(200).json(reservas);
   } catch (error) {
@@ -30,7 +44,21 @@ exports.obtenerid = async (req, res) => {
         "apellido": 1,
         "email":1,
         "telefono":1
-        
+
+        }).populate('habitaciones',{
+          "_id": 1,
+        "nombrehab":1,
+        "capacidad": 1,
+        "camas": 1, 
+        "descripcion": 1,
+        "wifi": 1,
+        "tv": 1,
+        "banio": 1,
+        "cajafuerte": 1,
+        "nevera": 1,
+        "valornoche": 1,
+        "img": 1,
+        "estado": 1
         });
       res.status(200).json(reservas);
     } catch (error) {
@@ -46,22 +74,28 @@ exports.obtenerid = async (req, res) => {
         fsalida,
         cantidadNoches,
         totalreserva,
-        userId} = req.body;
+        userId,
+        habitacionId} = req.body;
       //console.log(req.body);  
       const user=await Huesped.findById(userId);
       console.log(user._id);
+      const habitacion=await Habitacion.findById(habitacionId)
+      console.log(habitacion._id);
       const newReserva = new Reserva({
         fentrada,
         fsalida,
         cantidadNoches,
         freserva:Date.now(),
         totalreserva,
-        user:user._id
+        user:user._id,
+        habitaciones:habitacion._id
       })
       try{
         const saveReserva=await newReserva.save();
         user.reservas=user.reservas.concat(saveReserva._id);
         await user.save();
+        habitacion.reservas=habitacion.reservas.concat(saveReserva._id);
+        await habitacion.save();
         console.log(saveReserva)
         res.status(200).json(saveReserva);
       }catch (error) {
