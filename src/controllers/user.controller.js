@@ -21,7 +21,8 @@ exports.obtener = async (req, res) => {
         "nevera": 1,
         "valornoche": 1,
         "img": 1,
-        "estado": 1
+        "estado": 1,
+       
          } // in reservas, populate habitaciones
       }
     }     
@@ -35,7 +36,8 @@ exports.obtenerid = async (req, res) => {
     try {
       const id = req.params.id;
       const users = await User.findById(id).populate({
-        path: "reservas", // populate reservas
+        path: "reservas",
+        select:{user:0}, // populate reservas
         populate: {
            path: "habitaciones",
            select:{
